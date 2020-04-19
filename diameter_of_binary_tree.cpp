@@ -94,6 +94,25 @@ void postorder(TreeNode *root) {
     cout << "}" << endl;
 }
 
+void printBT(const std::string& prefix, const TreeNode* node, bool isLeft) {
+    if( node != nullptr ) {
+        cout << prefix;
+
+        cout << (isLeft ? "├──" : "└──" );
+
+        // print the value of the node
+        cout << node->val << endl;
+
+        // enter the next tree level - left and right branch
+        printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
+        printBT( prefix + (isLeft ? "│   " : "    "), node->right, false);
+    }
+}
+
+void printBT(const TreeNode* node) {
+    printBT("", node, false);
+}
+
 TreeNode* build_tree(vector<string> &arr) {
     if(arr.size() == 0) {
         return nullptr;
@@ -102,15 +121,15 @@ TreeNode* build_tree(vector<string> &arr) {
     TreeNode *root = new TreeNode(stoi(arr[0]));
     q.push(root);
 
-    for(int i=0; i < arr.size()/2; ++i) {
+    for(int i=1; i < arr.size(); i+=2) {
         TreeNode *p = q.front();
         q.pop();
 
-        int left  = 2*i + 1;
-        int right = 2*i + 2;
+        p->left  = (arr[i]  == "N") ? nullptr : new TreeNode(stoi(arr[i]));
 
-        p->left  = (arr[left]  == "N") ? nullptr : new TreeNode(stoi(arr[left]));
-        p->right = (arr[right] == "N") ? nullptr : new TreeNode(stoi(arr[right]));
+        if(i < arr.size()-1) {
+            p->right = (arr[i+1] == "N") ? nullptr : new TreeNode(stoi(arr[i+1]));
+        }
 
         if(p->left)
             q.push(p->left);
@@ -122,8 +141,43 @@ TreeNode* build_tree(vector<string> &arr) {
     return root;
 }
 
-int diameterOfBinaryTree(TreeNode* root) {
+int pathMax(TreeNode *root) {
+    if(!root)
+        return 0;
+    if(!root->left && !root->right) {
+        // cout << "pathMax(" << root->val << ") = 0" << endl;
+        return 0;
+    }
 
+    int ret = 1 + max(pathMax(root->left), pathMax(root->right));
+    // cout << "pathMax(" << root->val << ") = " << ret << endl;
+    return ret;
+}
+
+int diameterOfBinaryTree(TreeNode *root, int &diameter) {
+    if(!root)
+        return 0;
+    if(!root->left && !root->right) {
+        cout << "diameterOfBinaryTree(" << root->val << ") = 0, " << diameter << endl;
+        return 0;
+    }
+
+    int leftMax = diameterOfBinaryTree(root->left, diameter);
+    int rightMax = diameterOfBinaryTree(root->right, diameter);
+    int ret = 1 + max(leftMax, rightMax);
+    int rootMax = ((root->left) ? leftMax + 1 : 0) + ((root->right) ? rightMax + 1 : 0);
+
+    diameter = max({diameter, ret, rootMax});
+
+    cout << "diameterOfBinaryTree(" << root->val << ") = " << ret << ", " << diameter << endl;
+
+    return ret;
+}
+
+int diameterOfBinaryTree(TreeNode *root) {
+    int diameter = 0;
+    diameterOfBinaryTree(root, diameter);
+    return diameter;
 }
 
 int main() {
@@ -133,15 +187,21 @@ int main() {
     };
 
     vector<test> tests = {
-        { {"1", "2", "N", "3", "4"}, 2 },
+        { {"1","2","N","3","4","5","N","6"}, 4 },
+        { {"1","2"}, 1 },
+        { {"1"}, 0 },
     };
 
     for(auto &t: tests) {
         TreeNode *root = build_tree(t.arr);
-        BFS(root);
-        inorder(root);
-        preorder(root);
-        postorder(root);
+        // printBT(root);
+        // BFS(root);
+        // inorder(root);
+        // preorder(root);
+        // postorder(root);
+        int ret = diameterOfBinaryTree(root);
+        cout << ret << endl;
+        assert(ret == t.expected);
     }
     return 0;
 }
