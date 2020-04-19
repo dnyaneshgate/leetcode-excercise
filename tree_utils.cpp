@@ -73,6 +73,9 @@ void postorder(TreeNode *root) {
     cout << "}" << endl;
 }
 
+/*
+ * https://stackoverflow.com/questions/36802354/print-binary-tree-in-a-pretty-way-using-c
+ */
 void printBT(const std::string& prefix, const TreeNode* node, bool isLeft) {
     if( node != nullptr ) {
         cout << prefix;
