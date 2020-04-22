@@ -31,53 +31,35 @@
  * 0 <= prices[i] <= 10 ^ 4
  */
 
-#include <bits/stdc++.h>
+package main
 
-using namespace std;
+import "fmt"
 
-int maxProfit(vector<int> &prices) {
-    if(prices.size() == 1) {
-        return 0;
-    }
-    int buy = -1;
-    int profit = 0;
-    int i=1;
-    for (i=1; i<prices.size(); ++i) {
-        if(prices[i-1] > prices[i]) {
-            if(buy != -1) {
-                profit += prices[i-1] - buy;
-                cout << "buy: " << buy << "  sell: " << prices[i-1] <<  "  profit: " << profit << endl;
-                buy = -1;
-            }
-        } else if (prices[i-1] < prices[i]) {
-            if(buy == -1) {
-                buy = prices[i-1];
-            }
-        }
-    }
+func maxProfit(prices []int) int {
+	var profit int
 
-    if(buy != -1 && buy < prices[i-1]) {
-        profit += prices[i-1] - buy;
-        cout << "buy: " << buy << "  sell: " << prices[i-1] <<  "  profit: " << profit << endl;
-    }
-    return profit;
+	for i := 1; i < len(prices); i++ {
+		if prices[i] > prices[i-1] {
+			profit += prices[i] - prices[i-1]
+		}
+	}
+
+	return profit
 }
 
-int main() {
-    struct test {
-        vector<int> arr;
-        int expected;
-    };
-    vector<test> tests = {
-        {{7,1,5,3,6,4}, 7},
-        {{1,2,3,4,5}, 4},
-        {{7,6,4,3,1}, 0},
-    };
+func main() {
+	tests := []struct {
+		prices   []int
+		expected int
+	}{
+		{[]int{7, 1, 5, 3, 6, 4}, 7},
+		{[]int{1, 2, 3, 4, 5}, 4},
+		{[]int{7, 6, 4, 3, 1}, 0},
+	}
 
-    for(auto t: tests) {
-        int ret = maxProfit(t.arr);
-        cout << ret << endl;
-        assert(ret == t.expected);
-    }
-    return 0;
+	for indx, t := range tests {
+		if maxProfit(t.prices) != t.expected {
+			panic(fmt.Sprintf("Test %v failed", indx))
+		}
+	}
 }
