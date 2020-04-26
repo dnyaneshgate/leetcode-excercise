@@ -26,24 +26,22 @@
  * 1 <= stones[i] <= 1000
  */
 
-
 #include <bits/stdc++.h>
 
 using namespace std;
 
-
-int lastStoneWeight(vector<int>& stones) {
+int lastStoneWeight(vector<int> &stones) {
     priority_queue<int> q(stones.begin(), stones.end());
-    while(!q.empty() && q.size() > 1) {
+    while (!q.empty() && q.size() > 1) {
         int s1 = q.top();
         q.pop();
         int s2 = q.top();
         q.pop();
 
-        q.push(abs(s1-s2));
+        q.push(abs(s1 - s2));
     }
 
-    if(q.empty()) {
+    if (q.empty()) {
         return 0;
     }
 
@@ -52,18 +50,18 @@ int lastStoneWeight(vector<int>& stones) {
     return ret;
 }
 
-int main () {
+int main() {
     struct test_t {
         vector<int> arr;
         int expected;
     };
 
     vector<test_t> tests = {
-        {{2,7,4,1,8,1}, 1},
+        {{2, 7, 4, 1, 8, 1}, 1},
     };
 
-    for(auto &t: tests) {
-        assert( lastStoneWeight(t.arr) == t.expected );
+    for (auto &t : tests) {
+        assert(lastStoneWeight(t.arr) == t.expected);
     }
 
     return 0;

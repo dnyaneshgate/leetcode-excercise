@@ -59,29 +59,34 @@ using namespace std;
 
 bool check(string &s, stack<char> st, int start, int end) {
     // cout << "check: " << string(s, start, end) << ", start=" << start << ", end=" << end << endl;
-    for(int i=start; i<=end; ++i) {
-        if(s[i] == '(') {
+    for (int i = start; i <= end; ++i) {
+        if (s[i] == '(') {
             st.push(s[i]);
             continue;
         }
 
-        if(s[i] == ')') {
-            if(st.empty()) return false;
-            if(st.top() != '(') return false;
+        if (s[i] == ')') {
+            if (st.empty())
+                return false;
+            if (st.top() != '(')
+                return false;
             st.pop();
             continue;
         }
 
-        if(s[i] == '*') {
-            if(check(s, st, i+1, end)) return true;
+        if (s[i] == '*') {
+            if (check(s, st, i + 1, end))
+                return true;
             // else cout << " *=' ' test failed " << endl;
 
             s[i] = '(';
-            if(check(s, st, i, end)) return true;
+            if (check(s, st, i, end))
+                return true;
             // else cout << " *='(' test failed " << endl;
 
             s[i] = ')';
-            if(check(s, st, i, end)) return true;
+            if (check(s, st, i, end))
+                return true;
             // else cout << " *=')' test failed " << endl;
 
             return false;
@@ -93,7 +98,7 @@ bool check(string &s, stack<char> st, int start, int end) {
 
 bool checkValidString(string s) {
     stack<char> st;
-    return check(s, st, 0, s.length()-1);
+    return check(s, st, 0, s.length() - 1);
 }
 
 int main() {
@@ -107,21 +112,21 @@ int main() {
         // { "(*)",    true },
         // { "(***)",  true },
         // { "(*())",  true },
-        { "(*))",   true },
-        { "(*)))",  false },
-        { "(*))*)", true },
-        { ")",      false },
-        { ")*",     false },
-        { "(",      false },
-        { "(*()",   true },
-        { "((*)",   true },
+        {"(*))", true},
+        {"(*)))", false},
+        {"(*))*)", true},
+        {")", false},
+        {")*", false},
+        {"(", false},
+        {"(*()", true},
+        {"((*)", true},
     };
 
     int i = 0;
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         bool ret = checkValidString(t.str);
         cout << "Test " << i++ << ": " << ret << endl;
-        assert( ret == t.expected );
+        assert(ret == t.expected);
     }
 
     return 0;

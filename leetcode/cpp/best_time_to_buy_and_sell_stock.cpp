@@ -36,29 +36,29 @@
 using namespace std;
 
 int maxProfit(vector<int> &prices) {
-    if(prices.size() == 1) {
+    if (prices.size() == 1) {
         return 0;
     }
-    int buy = -1;
+    int buy    = -1;
     int profit = 0;
-    int i=1;
-    for (i=1; i<prices.size(); ++i) {
-        if(prices[i-1] > prices[i]) {
-            if(buy != -1) {
-                profit += prices[i-1] - buy;
-                cout << "buy: " << buy << "  sell: " << prices[i-1] <<  "  profit: " << profit << endl;
+    int i      = 1;
+    for (i = 1; i < prices.size(); ++i) {
+        if (prices[i - 1] > prices[i]) {
+            if (buy != -1) {
+                profit += prices[i - 1] - buy;
+                cout << "buy: " << buy << "  sell: " << prices[i - 1] << "  profit: " << profit << endl;
                 buy = -1;
             }
-        } else if (prices[i-1] < prices[i]) {
-            if(buy == -1) {
-                buy = prices[i-1];
+        } else if (prices[i - 1] < prices[i]) {
+            if (buy == -1) {
+                buy = prices[i - 1];
             }
         }
     }
 
-    if(buy != -1 && buy < prices[i-1]) {
-        profit += prices[i-1] - buy;
-        cout << "buy: " << buy << "  sell: " << prices[i-1] <<  "  profit: " << profit << endl;
+    if (buy != -1 && buy < prices[i - 1]) {
+        profit += prices[i - 1] - buy;
+        cout << "buy: " << buy << "  sell: " << prices[i - 1] << "  profit: " << profit << endl;
     }
     return profit;
 }
@@ -69,12 +69,12 @@ int main() {
         int expected;
     };
     vector<test> tests = {
-        {{7,1,5,3,6,4}, 7},
-        {{1,2,3,4,5}, 4},
-        {{7,6,4,3,1}, 0},
+        {{7, 1, 5, 3, 6, 4}, 7},
+        {{1, 2, 3, 4, 5}, 4},
+        {{7, 6, 4, 3, 1}, 0},
     };
 
-    for(auto t: tests) {
+    for (auto t : tests) {
         int ret = maxProfit(t.arr);
         cout << ret << endl;
         assert(ret == t.expected);

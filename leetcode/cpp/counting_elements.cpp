@@ -37,25 +37,25 @@
 
 using namespace std;
 
-auto speedup=[](){
+auto speedup = []() {
     std::ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
     return nullptr;
 }();
 
-int countElements1(vector<int>& arr) {
-    if(arr.size() < 2) {
+int countElements1(vector<int> &arr) {
+    if (arr.size() < 2) {
         return 0;
     }
     sort(arr.begin(), arr.end());
     int ret = 0;
     int dup = 1;
-    for(int i=1; i<arr.size(); ++i) {
-        if((arr[i] - arr[i-1] == 1)) {
+    for (int i = 1; i < arr.size(); ++i) {
+        if ((arr[i] - arr[i - 1] == 1)) {
             ret += dup;
             dup = 1;
-        } else if(arr[i-1] == arr[i]) {
+        } else if (arr[i - 1] == arr[i]) {
             ++dup;
         } else {
             dup = 1;
@@ -64,17 +64,17 @@ int countElements1(vector<int>& arr) {
     return ret;
 }
 
-int countElements(vector<int>& arr) {
-    if(arr.size() < 2) {
+int countElements(vector<int> &arr) {
+    if (arr.size() < 2) {
         return 0;
     }
-    unordered_map<int,int> mp;
-    for(auto &i: arr) {
+    unordered_map<int, int> mp;
+    for (auto &i : arr) {
         mp[i]++;
     }
     int ans = 0;
-    for(auto &i: mp) {
-        if(mp.count(i.first+1)) {
+    for (auto &i : mp) {
+        if (mp.count(i.first + 1)) {
             ans += i.second;
         }
     }
@@ -88,13 +88,13 @@ int main() {
     };
 
     vector<test> tests = {
-        { {1,2,3}, 2 },
-        { {1,1,3,3,5,5,7,7}, 0 },
-        { {1,3,2,3,5,0}, 3 },
-        { {1,1,2,2}, 2 },
+        {{1, 2, 3}, 2},
+        {{1, 1, 3, 3, 5, 5, 7, 7}, 0},
+        {{1, 3, 2, 3, 5, 0}, 3},
+        {{1, 1, 2, 2}, 2},
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         int ret = countElements(t.arr);
         cout << ret << endl;
         assert(ret == t.expected);

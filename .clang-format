@@ -1,0 +1,15 @@
+{
+    BasedOnStyle: LLVM,
+    UseTab: Never,
+    IndentWidth: 4,
+    TabWidth: 4,
+    AllowShortIfStatementsOnASingleLine: false,
+    IndentCaseLabels: false,
+    ColumnLimit: 0,
+    AccessModifierOffset: -4,
+    AlignConsecutiveAssignments: true,
+    AlignConsecutiveMacros: true,
+    AlignEscapedNewlines: Right,
+    AlignTrailingComments: true,
+    BreakBeforeBraces: Attach,
+}

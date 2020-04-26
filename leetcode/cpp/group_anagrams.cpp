@@ -16,7 +16,6 @@
  * The order of your output does not matter.
  */
 
-
 /*
  * class Solution {
  *     int powerWithMod(int base, int t, int mod){
@@ -131,16 +130,15 @@
  * }();
  */
 
-
 #include <bits/stdc++.h>
 
 using namespace std;
 
-vector<vector<string>> groupAnagrams1(vector<string>& strs) {
+vector<vector<string>> groupAnagrams1(vector<string> &strs) {
     vector<vector<string>> ret;
     unordered_map<int, vector<string>> map_;
-    int i=0;
-    for(auto s: strs) {
+    int i = 0;
+    for (auto s : strs) {
         sort(s.begin(), s.end());
         hash<string> h;
         int str_hash = h(s);
@@ -149,21 +147,21 @@ vector<vector<string>> groupAnagrams1(vector<string>& strs) {
         ++i;
     }
 
-    for(auto &it: map_) {
+    for (auto &it : map_) {
         ret.push_back(it.second);
     }
 
     return ret;
 }
 
-vector<vector<string>> groupAnagrams(vector<string>& strs) {
+vector<vector<string>> groupAnagrams(vector<string> &strs) {
     vector<vector<string>> ret;
-    unordered_map<string,int> map_;
-    int i=0;
+    unordered_map<string, int> map_;
+    int i     = 0;
     int count = -1;
-    for(auto s: strs) {
+    for (auto s : strs) {
         sort(s.begin(), s.end());
-        if(map_.count(s)) {
+        if (map_.count(s)) {
             ret[map_[s]].push_back(strs[i]);
         } else {
             ret.push_back({strs[i]});
@@ -184,14 +182,14 @@ int main() {
         {
             {"eat", "tea", "tan", "ate", "nat", "bat"},
             {
-                {"ate","eat","tea"},
-                {"nat","tan"},
+                {"ate", "eat", "tea"},
+                {"nat", "tan"},
                 {"bat"},
             },
         },
     };
 
-    for(auto t: tests) {
+    for (auto t : tests) {
         vector<vector<string>> ret = groupAnagrams(t.arr);
     }
 }

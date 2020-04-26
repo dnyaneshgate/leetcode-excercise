@@ -21,7 +21,6 @@
  * Output: 3
  */
 
-
 /*
  * class Solution {
  * private:
@@ -63,32 +62,31 @@
  * }();
  */
 
-
 #include <bits/stdc++.h>
 
 using namespace std;
 
 int rows, cols;
 
-bool is_safe(vector<vector<char>>& grid, int x, int y, vector<vector<bool>> &visited) {
+bool is_safe(vector<vector<char>> &grid, int x, int y, vector<vector<bool>> &visited) {
     return (x >= 0) && (x < rows) && (y >= 0) && (y < cols) && grid[x][y] == '1' && !visited[x][y];
 }
 
-void dfs(vector<vector<char>>& grid, int x, int y, vector<vector<bool>> &visited) {
+void dfs(vector<vector<char>> &grid, int x, int y, vector<vector<bool>> &visited) {
     static int row_nbr[] = {-1, 0, 0, 1};
     static int col_nbr[] = {0, -1, 1, 0};
 
     visited[x][y] = true;
 
-    for(int i=0; i<4; i++) {
-        if(is_safe(grid, x+row_nbr[i], y+col_nbr[i], visited)) {
-            dfs(grid, x+row_nbr[i], y+col_nbr[i], visited);
+    for (int i = 0; i < 4; i++) {
+        if (is_safe(grid, x + row_nbr[i], y + col_nbr[i], visited)) {
+            dfs(grid, x + row_nbr[i], y + col_nbr[i], visited);
         }
     }
 }
 
-int numIslands(vector<vector<char>>& grid) {
-    if(grid.size() == 0) {
+int numIslands(vector<vector<char>> &grid) {
+    if (grid.size() == 0) {
         return 0;
     }
 
@@ -98,9 +96,9 @@ int numIslands(vector<vector<char>>& grid) {
 
     int count = 0;
 
-    for(int i=0; i<rows; ++i) {
-        for(int j=0; j<cols; ++j) {
-            if(grid[i][j] == '1' && !visited[i][j]) {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (grid[i][j] == '1' && !visited[i][j]) {
                 ++count;
                 dfs(grid, i, j, visited);
             }
@@ -119,46 +117,46 @@ int main() {
     vector<test_t> tests = {
         {
             {
-                {'1','1','1','1','0'},
-                {'1','1','0','1','0'},
-                {'1','1','0','0','0'},
-                {'0','0','0','0','0'},
+                {'1', '1', '1', '1', '0'},
+                {'1', '1', '0', '1', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '0', '0', '0'},
             },
             1,
         },
         {
             {
-                {'1','1','0','0','0'},
-                {'1','1','0','0','0'},
-                {'0','0','1','0','0'},
-                {'0','0','0','1','1'},
+                {'1', '1', '0', '0', '0'},
+                {'1', '1', '0', '0', '0'},
+                {'0', '0', '1', '0', '0'},
+                {'0', '0', '0', '1', '1'},
             },
             3,
         },
         {
             {
-                {'1','1','0','1','0', '1'},
-                {'0','1','1','1','0', '1'},
-                {'0','0','0','0','0', '1'},
-                {'0','0','0','1','1', '0'},
+                {'1', '1', '0', '1', '0', '1'},
+                {'0', '1', '1', '1', '0', '1'},
+                {'0', '0', '0', '0', '0', '1'},
+                {'0', '0', '0', '1', '1', '0'},
             },
             3,
         },
         {
             {
-                {'1','1','1','1','1','1','1'},
-                {'0','0','0','0','0','0','1'},
-                {'1','1','1','1','1','0','1'},
-                {'1','0','0','0','1','0','1'},
-                {'1','0','1','0','1','0','1'},
-                {'1','0','1','1','1','0','1'},
-                {'1','1','1','1','1','1','1'},
+                {'1', '1', '1', '1', '1', '1', '1'},
+                {'0', '0', '0', '0', '0', '0', '1'},
+                {'1', '1', '1', '1', '1', '0', '1'},
+                {'1', '0', '0', '0', '1', '0', '1'},
+                {'1', '0', '1', '0', '1', '0', '1'},
+                {'1', '0', '1', '1', '1', '0', '1'},
+                {'1', '1', '1', '1', '1', '1', '1'},
             },
             1,
         },
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         assert(numIslands(t.grid) == t.expected);
     }
 

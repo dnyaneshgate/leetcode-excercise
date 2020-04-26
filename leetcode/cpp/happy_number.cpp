@@ -18,8 +18,6 @@
  * 12 + 02 + 02 = 1
  */
 
-
-
 /**
  * 18
  * 1 + 64 = 65
@@ -31,17 +29,14 @@
 
 #include <bits/stdc++.h>
 
-
 using namespace std;
-
 
 unordered_map<int, int> map_;
 
-
 bool isHappy(int num) {
-    if(num==1)
+    if (num == 1)
         return true;
-    if(map_.find(num) != map_.end())
+    if (map_.find(num) != map_.end())
         return false;
 
     map_[num] = 1;
@@ -49,9 +44,9 @@ bool isHappy(int num) {
     int n = num;
     int s = 0;
 
-    while(n > 0) {
+    while (n > 0) {
         int i = n % 10;
-        s += i*i;
+        s += i * i;
         n = n / 10;
     }
 
@@ -69,7 +64,7 @@ int main() {
         {17, false},
     };
 
-    for(auto t: tests) {
+    for (auto t : tests) {
         assert(isHappy(t.num) == t.expected);
     }
     return 0;

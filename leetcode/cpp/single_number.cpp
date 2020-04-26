@@ -19,9 +19,9 @@
 
 using namespace std;
 
-int singleNumber(vector<int>& nums) {
+int singleNumber(vector<int> &nums) {
     int ret = nums[0];
-    for(int i=1; i<nums.size(); i++)
+    for (int i = 1; i < nums.size(); i++)
         ret ^= nums[i];
     return ret;
 }
@@ -33,11 +33,11 @@ int main() {
     };
 
     vector<test> tests = {
-        {{2,2,1}, 1},
-        {{4,1,2,1,2}, 4},
+        {{2, 2, 1}, 1},
+        {{4, 1, 2, 1, 2}, 4},
     };
 
-    for(auto t: tests) {
+    for (auto t : tests) {
         int ret = singleNumber(t.arr);
         cout << ret << endl;
         assert(ret == t.expected);

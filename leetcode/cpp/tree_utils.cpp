@@ -1,21 +1,22 @@
 #include <iostream>
-#include <vector>
 #include <queue>
+#include <vector>
 
 #include "tree_utils.h"
 
 using namespace std;
 
 void BFS(TreeNode *root) {
-    queue<TreeNode*> q;
+    queue<TreeNode *> q;
     q.push(root);
 
-    while(!q.empty()) {
+    while (!q.empty()) {
         TreeNode *p = q.front();
         q.pop();
 
-        if(!p) {
-            cout << "N" << " ";
+        if (!p) {
+            cout << "N"
+                 << " ";
             continue;
         }
 
@@ -29,7 +30,7 @@ void BFS(TreeNode *root) {
 }
 
 void inorder_rec(TreeNode *root) {
-    if(!root)
+    if (!root)
         return;
 
     inorder_rec(root->left);
@@ -44,7 +45,7 @@ void inorder(TreeNode *root) {
 }
 
 void preorder_rec(TreeNode *root) {
-    if(!root)
+    if (!root)
         return;
 
     cout << root->val << " ";
@@ -59,7 +60,7 @@ void preorder(TreeNode *root) {
 }
 
 void postorder_rec(TreeNode *root) {
-    if(!root)
+    if (!root)
         return;
 
     postorder_rec(root->left);
@@ -76,47 +77,47 @@ void postorder(TreeNode *root) {
 /*
  * https://stackoverflow.com/questions/36802354/print-binary-tree-in-a-pretty-way-using-c
  */
-void printBT(const std::string& prefix, const TreeNode* node, bool isLeft) {
-    if( node != nullptr ) {
+void printBT(const std::string &prefix, const TreeNode *node, bool isLeft) {
+    if (node != nullptr) {
         cout << prefix;
 
-        cout << (isLeft ? "├──" : "└──" );
+        cout << (isLeft ? "├──" : "└──");
 
         // print the value of the node
         cout << node->val << endl;
 
         // enter the next tree level - left and right branch
-        printBT( prefix + (isLeft ? "│   " : "    "), node->left, true);
-        printBT( prefix + (isLeft ? "│   " : "    "), node->right, false);
+        printBT(prefix + (isLeft ? "│   " : "    "), node->left, true);
+        printBT(prefix + (isLeft ? "│   " : "    "), node->right, false);
     }
 }
 
-void printBT(const TreeNode* node) {
+void printBT(const TreeNode *node) {
     printBT("", node, false);
 }
 
-TreeNode* build_tree(vector<string> &arr) {
-    if(arr.size() == 0) {
+TreeNode *build_tree(vector<string> &arr) {
+    if (arr.size() == 0) {
         return nullptr;
     }
-    queue<TreeNode*> q;
+    queue<TreeNode *> q;
     TreeNode *root = new TreeNode(stoi(arr[0]));
     q.push(root);
 
-    for(int i=1; i < arr.size(); i+=2) {
+    for (int i = 1; i < arr.size(); i += 2) {
         TreeNode *p = q.front();
         q.pop();
 
-        p->left  = (arr[i]  == "N") ? nullptr : new TreeNode(stoi(arr[i]));
+        p->left = (arr[i] == "N") ? nullptr : new TreeNode(stoi(arr[i]));
 
-        if(i < arr.size()-1) {
-            p->right = (arr[i+1] == "N") ? nullptr : new TreeNode(stoi(arr[i+1]));
+        if (i < arr.size() - 1) {
+            p->right = (arr[i + 1] == "N") ? nullptr : new TreeNode(stoi(arr[i + 1]));
         }
 
-        if(p->left)
+        if (p->left)
             q.push(p->left);
 
-        if(p->right)
+        if (p->right)
             q.push(p->right);
     }
 

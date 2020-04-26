@@ -12,7 +12,6 @@
  * Note: The length of the given binary array will not exceed 50,000.
  */
 
-
 /*
  * OTHER BEST SOLUTIONS
  *
@@ -61,17 +60,17 @@
 using namespace std;
 
 int maxLen(vector<int> &nums) {
-    unordered_map<int,int> mp;
+    unordered_map<int, int> mp;
     int sum = 0, max_len = 0;
 
-    for(int i=0; i<nums.size(); ++i) {
+    for (int i = 0; i < nums.size(); ++i) {
         sum += (nums[i] == 0) ? -1 : 1;
 
-        if(sum == 0) {
+        if (sum == 0) {
             max_len = i + 1;
         }
 
-        if(mp.find(sum) != mp.end()) {
+        if (mp.find(sum) != mp.end()) {
             max_len = max(max_len, i - mp[sum]);
         } else {
             mp[sum] = i;
@@ -81,7 +80,7 @@ int maxLen(vector<int> &nums) {
     return max_len;
 }
 
-int findMaxLength(vector<int>& nums) {
+int findMaxLength(vector<int> &nums) {
     return maxLen(nums);
 }
 
@@ -92,20 +91,20 @@ int main() {
     };
 
     vector<test_t> tests = {
-        { {0,1,0,1,0}, 4 },
-        { {0,1,0,1,1}, 4 },
-        { {0,1,0,1,0,0,1}, 6 },
-        { {1, 0, 1, 1, 1, 0, 0}, 6 },
-        { {1, 1, 1, 1}, 0 },
-        { {0, 0, 1, 1, 0}, 4 },
-        { {0}, 0 },
-        { {}, 0 },
+        {{0, 1, 0, 1, 0}, 4},
+        {{0, 1, 0, 1, 1}, 4},
+        {{0, 1, 0, 1, 0, 0, 1}, 6},
+        {{1, 0, 1, 1, 1, 0, 0}, 6},
+        {{1, 1, 1, 1}, 0},
+        {{0, 0, 1, 1, 0}, 4},
+        {{0}, 0},
+        {{}, 0},
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         int ret = findMaxLength(t.nums);
         cout << ret << endl;
-        assert( ret == t.expected );
+        assert(ret == t.expected);
     }
     return 0;
 }

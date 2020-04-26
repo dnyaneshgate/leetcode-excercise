@@ -15,7 +15,6 @@
  * Note: The length of path between two nodes is represented by the number of edges between them.
  */
 
-
 #include <bits/stdc++.h>
 
 #include "tree_utils.h"
@@ -23,9 +22,9 @@
 using namespace std;
 
 int pathMax(TreeNode *root) {
-    if(!root)
+    if (!root)
         return 0;
-    if(!root->left && !root->right) {
+    if (!root->left && !root->right) {
         // cout << "pathMax(" << root->val << ") = 0" << endl;
         return 0;
     }
@@ -36,17 +35,17 @@ int pathMax(TreeNode *root) {
 }
 
 int diameterOfBinaryTree(TreeNode *root, int &diameter) {
-    if(!root)
+    if (!root)
         return 0;
-    if(!root->left && !root->right) {
+    if (!root->left && !root->right) {
         cout << "diameterOfBinaryTree(" << root->val << ") = 0, " << diameter << endl;
         return 0;
     }
 
-    int leftMax = diameterOfBinaryTree(root->left, diameter);
+    int leftMax  = diameterOfBinaryTree(root->left, diameter);
     int rightMax = diameterOfBinaryTree(root->right, diameter);
-    int ret = 1 + max(leftMax, rightMax);
-    int rootMax = ((root->left) ? leftMax + 1 : 0) + ((root->right) ? rightMax + 1 : 0);
+    int ret      = 1 + max(leftMax, rightMax);
+    int rootMax  = ((root->left) ? leftMax + 1 : 0) + ((root->right) ? rightMax + 1 : 0);
 
     diameter = max({diameter, ret, rootMax});
 
@@ -68,12 +67,12 @@ int main() {
     };
 
     vector<test> tests = {
-        { {"1","2","N","3","4","5","N","6"}, 4 },
-        { {"1","2"}, 1 },
-        { {"1"}, 0 },
+        {{"1", "2", "N", "3", "4", "5", "N", "6"}, 4},
+        {{"1", "2"}, 1},
+        {{"1"}, 0},
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         TreeNode *root = build_tree(t.arr);
         // printBT(root);
         // BFS(root);

@@ -13,10 +13,10 @@
 using namespace std;
 
 bool check(vector<int> &nums, int k) {
-    unordered_map<int,int> mp;
-    for(auto x: nums) {
-        int y = abs(k-x);
-        if(mp.count(y)) {
+    unordered_map<int, int> mp;
+    for (auto x : nums) {
+        int y = abs(k - x);
+        if (mp.count(y)) {
             return true;
         }
         mp[x] = 1;
@@ -32,14 +32,14 @@ int main() {
     };
 
     vector<test_t> tests = {
-        { {10, 15, 3, 7}, 17, true },
-        { {10, 15, 3, 7}, 18, true },
-        { {10}, 19, false },
-        { {}, 19, false },
+        {{10, 15, 3, 7}, 17, true},
+        {{10, 15, 3, 7}, 18, true},
+        {{10}, 19, false},
+        {{}, 19, false},
     };
 
-    for(auto &t: tests) {
-        assert( check(t.arr, t.k) == t.expected );
+    for (auto &t : tests) {
+        assert(check(t.arr, t.k) == t.expected);
     }
 
     return 0;

@@ -23,21 +23,21 @@
 using namespace std;
 
 int maxLen(vector<int> &nums) {
-    unordered_map<int,int> mp;
+    unordered_map<int, int> mp;
     int sum = 0, max_len = 0;
 
-    for(int i=0; i<nums.size(); ++i) {
+    for (int i = 0; i < nums.size(); ++i) {
         sum += nums[i];
 
-        if(nums[i] == 0 && max_len == 0) {
+        if (nums[i] == 0 && max_len == 0) {
             max_len = 1;
         }
 
-        if(sum == 0) {
+        if (sum == 0) {
             max_len = i + 1;
         }
 
-        if(mp.find(sum) != mp.end()) {
+        if (mp.find(sum) != mp.end()) {
             max_len = max(max_len, i - mp[sum]);
         } else {
             mp[sum] = i;
@@ -54,14 +54,14 @@ int main() {
     };
 
     vector<test_t> tests = {
-        { {15, -2, 2, -8, 1, 7, 10, 23}, 5 },
-        { {15, -2, 2, -8, 1, 7, -15, 23}, 7 },
-        { {0, 1, 2,3,5}, 1 },
-        { {-1, 1, 2,3,5}, 2 },
-        { {1, 1, 2,3,5}, 0 },
+        {{15, -2, 2, -8, 1, 7, 10, 23}, 5},
+        {{15, -2, 2, -8, 1, 7, -15, 23}, 7},
+        {{0, 1, 2, 3, 5}, 1},
+        {{-1, 1, 2, 3, 5}, 2},
+        {{1, 1, 2, 3, 5}, 0},
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         assert(maxLen(t.nums) == t.expected);
     }
 

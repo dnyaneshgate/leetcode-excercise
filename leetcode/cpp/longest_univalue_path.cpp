@@ -34,9 +34,6 @@
  * Note: The given binary tree has not more than 10000 nodes. The height of the tree is not more than 1000.
  */
 
-
-
-
 #include <bits/stdc++.h>
 
 #include "tree_utils.h"
@@ -44,20 +41,20 @@
 using namespace std;
 
 int longestUnivaluePath(TreeNode *root, int &maxUniquePath) {
-    if(!root)
+    if (!root)
         return 0;
-    if(!root->left && !root->right) {
+    if (!root->left && !root->right) {
         cout << "longestUnivaluePath(" << root->val << ") = 0, " << maxUniquePath << endl;
         return 0;
     }
 
-    int leftMax = longestUnivaluePath(root->left, maxUniquePath);
+    int leftMax  = longestUnivaluePath(root->left, maxUniquePath);
     int rightMax = longestUnivaluePath(root->right, maxUniquePath);
 
-    leftMax = (root->left && root->left->val == root->val) ? leftMax + 1 : 0;
+    leftMax  = (root->left && root->left->val == root->val) ? leftMax + 1 : 0;
     rightMax = (root->right && root->right->val == root->val) ? rightMax + 1 : 0;
 
-    int ret = max(leftMax, rightMax);
+    int ret     = max(leftMax, rightMax);
     int rootMax = ((root->left) ? leftMax : 0) + ((root->right) ? rightMax : 0);
 
     maxUniquePath = max({maxUniquePath, ret, rootMax});
@@ -80,12 +77,11 @@ int main() {
     };
 
     vector<test> tests = {
-        {{"5","4","5","1","1","N","5"}, 2},
-        {{"1","4","5","4","4","N","5"}, 2},
-        {{"1","2","N","3","4","5","N","6"}, 0}
-    };
+        {{"5", "4", "5", "1", "1", "N", "5"}, 2},
+        {{"1", "4", "5", "4", "4", "N", "5"}, 2},
+        {{"1", "2", "N", "3", "4", "5", "N", "6"}, 0}};
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         TreeNode *root = build_tree(t.arr);
         // printBT(root);
         int ret = longestUnivaluePath(root);

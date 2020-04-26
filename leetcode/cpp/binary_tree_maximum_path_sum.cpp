@@ -26,7 +26,6 @@
  * Output: 42
  */
 
-
 /* ALTERNATE SOLUTIONS */
 
 /*
@@ -94,16 +93,17 @@
 using namespace std;
 
 int maxPathSum(TreeNode *root, int &sum) {
-    if(!root) return 0;
-    if(!root->left && !root->right) {
+    if (!root)
+        return 0;
+    if (!root->left && !root->right) {
         sum = max(sum, root->val);
         return root->val;
     }
 
-    int leftSum = maxPathSum(root->left, sum);
+    int leftSum  = maxPathSum(root->left, sum);
     int rightSum = maxPathSum(root->right, sum);
 
-    int ret = max(root->val + max(leftSum, rightSum), root->val);
+    int ret     = max(root->val + max(leftSum, rightSum), root->val);
     int rootMax = root->val + leftSum + rightSum;
 
     sum = max({sum, ret, rootMax, root->val});
@@ -111,8 +111,9 @@ int maxPathSum(TreeNode *root, int &sum) {
     return ret;
 }
 
-int maxPathSum(TreeNode* root) {
-    int sum = INT_MIN;;
+int maxPathSum(TreeNode *root) {
+    int sum = INT_MIN;
+    ;
     maxPathSum(root, sum);
     return sum;
 }
@@ -124,19 +125,18 @@ int main() {
     };
 
     vector<test_t> tests = {
-        { {"1","2", "3"}, 6 },
-        { {"-10","9","20","N","N","15","7"}, 42 },
-        { {"1", "3"}, 4 },
-        { {"1"}, 1 },
-        { {"-3"}, -3 },
-        { {"2","-1","-2"}, 2 },
-        { {"9","6","-3","N","N","-6","2","N","N","2","N","-6","-6","-6"}, 16 },
+        {{"1", "2", "3"}, 6},
+        {{"-10", "9", "20", "N", "N", "15", "7"}, 42},
+        {{"1", "3"}, 4},
+        {{"1"}, 1},
+        {{"-3"}, -3},
+        {{"2", "-1", "-2"}, 2},
+        {{"9", "6", "-3", "N", "N", "-6", "2", "N", "N", "2", "N", "-6", "-6", "-6"}, 16},
     };
 
-    for(auto &t: tests) {
+    for (auto &t : tests) {
         TreeNode *root = build_tree(t.arr);
         assert(maxPathSum(root) == t.expected);
     }
     return 0;
 }
-

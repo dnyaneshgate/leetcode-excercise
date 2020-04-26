@@ -15,12 +15,12 @@
 
 using namespace std;
 
-int maxSubArray(vector<int>& nums) {
-    int curr_max = nums[0];
+int maxSubArray(vector<int> &nums) {
+    int curr_max   = nums[0];
     int max_so_far = nums[0];
-    for(int i=1; i<nums.size(); i++) {
+    for (int i = 1; i < nums.size(); i++) {
         // printf("curr_max: %d, nums[i]: %d, max_so_far: %d\n", curr_max, nums[i], max_so_far);
-        curr_max = max(nums[i], curr_max + nums[i]);
+        curr_max   = max(nums[i], curr_max + nums[i]);
         max_so_far = max(curr_max, max_so_far);
         // printf("\t\tcurr_max: %d, nums[i]: %d, max_so_far: %d\n\n", curr_max, nums[i], max_so_far);
     }
@@ -34,14 +34,13 @@ int main() {
     };
 
     vector<test> tests = {
-        {{-2,1,-3,4,-1,2,1,-5,4}, 6},
-        {{4,-1,2,1}, 6},
+        {{-2, 1, -3, 4, -1, 2, 1, -5, 4}, 6},
+        {{4, -1, 2, 1}, 6},
     };
 
-    for(auto t: tests) {
+    for (auto t : tests) {
         int ret = maxSubArray(t.arr);
         cout << ret << endl;
         assert(ret == t.expected);
     }
-
 }

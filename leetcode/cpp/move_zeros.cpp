@@ -17,17 +17,17 @@ using namespace std;
 
 void swap(int &x, int &y) {
     int temp = x;
-    x = y;
-    y = temp;
+    x        = y;
+    y        = temp;
 }
 
-void moveZeroes(vector<int>& nums) {
-    for(int i=1, j=0; i<nums.size(); i++) {
-        if(nums[j] != 0) {
+void moveZeroes(vector<int> &nums) {
+    for (int i = 1, j = 0; i < nums.size(); i++) {
+        if (nums[j] != 0) {
             j++;
             continue;
         }
-        if(nums[j] == 0 && nums[i] != 0) {
+        if (nums[j] == 0 && nums[i] != 0) {
             swap(nums[j], nums[i]);
             ++j;
             continue;
@@ -35,18 +35,18 @@ void moveZeroes(vector<int>& nums) {
     }
 }
 
-string str(vector<int>& nums) {
+string str(vector<int> &nums) {
     stringstream s;
-    switch(nums.size()) {
-        case 0:
-            return "{}";
-        case 1:
-            s << "{" << nums[0] << "}";
-            return s.str();
+    switch (nums.size()) {
+    case 0:
+        return "{}";
+    case 1:
+        s << "{" << nums[0] << "}";
+        return s.str();
     }
 
     s << "{" << nums[0];
-    for(auto it = nums.begin()+1; it != nums.end(); it++) {
+    for (auto it = nums.begin() + 1; it != nums.end(); it++) {
         s << "," << *it;
     }
     s << "}";
@@ -54,7 +54,7 @@ string str(vector<int>& nums) {
 }
 
 int main() {
-    vector<int> arr1 = {0,1,0,3,12};
+    vector<int> arr1 = {0, 1, 0, 3, 12};
     moveZeroes(arr1);
     cout << str(arr1) << endl;
 }
