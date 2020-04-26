@@ -155,8 +155,8 @@ int main() {
     };
 
     for (auto &t : tests) {
-        cout << search(t.nums, t.target) << endl;
-        // assert(search(t.nums, t.target) == t.expected);
+        // cout << search(t.nums, t.target) << endl;
+        assert(search(t.nums, t.target) == t.expected);
     }
 
     return 0;
