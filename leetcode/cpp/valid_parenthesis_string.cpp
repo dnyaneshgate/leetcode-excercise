@@ -108,10 +108,10 @@ int main() {
     };
 
     vector<test_t> tests = {
-        // { "()",     true },
-        // { "(*)",    true },
-        // { "(***)",  true },
-        // { "(*())",  true },
+        {"()", true},
+        {"(*)", true},
+        {"(***)", true},
+        {"(*())", true},
         {"(*))", true},
         {"(*)))", false},
         {"(*))*)", true},
