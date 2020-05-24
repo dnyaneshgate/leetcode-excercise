@@ -70,12 +70,6 @@ func main() {
 		{"AB", 1, "AB"},
 	}
 
-	assert := func(ok bool, msg string) {
-		if !ok {
-			panic(msg)
-		}
-	}
-
 	for _, t := range tests {
 		assert(convert(t.str, t.n) == t.expected, "Failed")
 	}

@@ -197,12 +197,6 @@ func (cache *LRUCache) Put(key int, value int) {
 	}
 }
 
-func assert(ok bool, msg string) {
-	if !ok {
-		panic(msg)
-	}
-}
-
 func main() {
 	{
 		cache := Constructor(2)

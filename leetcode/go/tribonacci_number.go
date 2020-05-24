@@ -60,12 +60,6 @@ func main() {
 		{37, 2082876103},
 	}
 
-	assert := func(ok bool, msg string) {
-		if !ok {
-			panic(msg)
-		}
-	}
-
 	for _, t := range tests {
 		assert(tribonacci(t.n) == t.expected, "Failed")
 	}
