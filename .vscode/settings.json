@@ -80,5 +80,6 @@
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "editor.formatOnType": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "go.testEnvFile": ""
 }
