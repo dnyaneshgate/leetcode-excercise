@@ -20,39 +20,39 @@
 
 package main
 
-func newTreeNode(val int) *TreeNode {
-	return &TreeNode{Val: val}
-}
-
-func bsUtils(preorder []int, low, high int) *TreeNode {
-	if low > high {
+func bstFromPreorder(preorder []int) *TreeNode {
+	if len(preorder) == 0 {
 		return nil
 	}
 
-	root := newTreeNode(preorder[low])
+	root := NewTreeNode(preorder[0])
 	index := -1
-	for i := low + 1; i <= high; i++ {
-		if preorder[low] < preorder[i] {
+	for i := 1; i < len(preorder); i++ {
+		if preorder[i] > preorder[0] {
 			index = i
 			break
 		}
 	}
 
 	if index == -1 {
-		root.Left = bsUtils(preorder, low+1, high)
-		return root
+		root.Left = bstFromPreorder(preorder[1:])
+	} else {
+		root.Left = bstFromPreorder(preorder[1:index])
+		root.Right = bstFromPreorder(preorder[index:])
 	}
-
-	root.Left = bsUtils(preorder, low+1, index-1)
-	root.Right = bsUtils(preorder, index, high)
 
 	return root
 }
 
-func bstFromPreorder(preorder []int) *TreeNode {
-	return bsUtils(preorder, 0, len(preorder)-1)
-}
-
 func main() {
+	tests := [][]int{
+		{8, 5, 1, 7, 10, 9, 12},
+		{8, 5, 1, 7, 10, 12},
+		{8, 5, 1, 7, 10, 9},
+	}
 
+	for _, t := range tests {
+		root := bstFromPreorder(t)
+		PrintTree(root)
+	}
 }

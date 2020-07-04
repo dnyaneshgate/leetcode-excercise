@@ -13,6 +13,11 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// NewTreeNode ...
+func NewTreeNode(val int) *TreeNode {
+	return &TreeNode{Val: val}
+}
+
 // BuildTree ...
 func BuildTree(vec []string) *TreeNode {
 	q := queue.NewArrayQueue()
